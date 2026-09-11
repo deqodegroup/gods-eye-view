@@ -2,8 +2,8 @@
 
 **What:** Asia-Pacific Climate Intelligence platform. CesiumJS 1.124 + Google Photorealistic 3D Tiles + Vercel serverless API layer. Forked from `deqodegroup/gods-eye-view`.
 
-**Status:** Live at https://gods-eye-view-steel.vercel.app (rename pending → deqode-earth)  
-**Repo:** https://github.com/deqodegroup/gods-eye-view (rename pending → deqode-earth)  
+**Status:** Live at https://gods-eye-view-steel.vercel.app (rename pending → deqode-earthview)  
+**Repo:** https://github.com/deqodegroup/gods-eye-view (rename pending → deqode-earthview)  
 **Local:** `C:/Dev/deqode-earth-v2`  
 **Branch:** `main`
 
@@ -65,8 +65,8 @@ For deeper context on a specific area, read the system map card first:
 
 ## Next (Phase 1 — Climate Panel)
 
-- [ ] Rename GitHub repo → `deqode-earth` (manual, GitHub Settings)
-- [ ] Rename Vercel project → `deqode-earth` (manual, Vercel dashboard)
+- [ ] Rename GitHub repo → `deqode-earthview` (manual, GitHub Settings)
+- [ ] Rename Vercel project → `deqode-earthview` (manual, Vercel dashboard)
 - [ ] Climate Intelligence panel — third collapsible section in left dashboard
 - [ ] Disable spy tools with `[EARTH MODE]` CSS badge
 - [ ] Wire new climate API layers (OpenAQ, NOAA CRW, NHC, GFW, sea level, mangroves, displacement)
