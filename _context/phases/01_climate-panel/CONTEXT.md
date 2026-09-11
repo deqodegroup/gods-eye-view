@@ -1,92 +1,91 @@
 # Phase 01 — Climate Intelligence Panel
 
-**Goal:** Add a third collapsible section to the left dashboard — "CLIMATE" — with climate-specific data layers. Disable spy/military tools in EARTH mode with a visual badge. Wire new free climate APIs.
+**Goal:** Add a "🌊 CLIMATE" section to the left dashboard with 8 expert-validated climate layers. Disable spy tools with EARTH MODE badge.
 
+**Audience:** IOM, COPRRRA delegates, Pacific SIDS governments, climate NGOs  
 **Status:** Not started  
 **Dependencies:** All 24 API functions live ✓ · Pacific SIDS locations live ✓
 
 ---
 
-## Inputs (read before starting)
+## Inputs
 
 | File | What to read |
 |------|-------------|
-| `src/ui.js` | Left-panel structure, how sections are built |
-| `src/panelStackLayout.js` | Collapsible section engine — how to add a third section |
-| `src/data/manager.js` | `buildTogglePanel()` — how layer toggles render |
-| `src/data/earthquakes.js` | Template for a new data layer module |
-| `_context/map/src-structure.md` | Full module map + EARTH MODE disable list |
-| `_context/map/api-layer.md` | Which API endpoints exist to wire |
+| `src/ui.js` | Left-panel structure |
+| `src/panelStackLayout.js` | Collapsible section engine |
+| `src/data/manager.js` | How layer toggles render |
+| `src/data/earthquakes.js` | Template for a new layer module |
+| `_context/map/src-structure.md` | Module map + EARTH MODE disable list |
 
 ---
 
-## Process (ordered)
+## Process
 
-**Step 1 — EARTH MODE badges**
-- In `src/ui.js` or toggle panel render, add `earth-mode-disabled` CSS class to the six spy layers
-- Badge text: `[EARTH MODE]` on the toggle row, gray out the toggle
-- Layers: `militaryFlights`, `rocketLaunches`, `cctv`, `radio`, `militaryInstallations`, `militaryAwareness`
-- Keep all underlying API functions and layer code — just disable the UI toggle
+### Step 1 — EARTH MODE badges
 
-**Human gate 1:** Visual check — spy layers show badge, are non-interactive, look clean
+Gray out 6 spy layers in the toggle panel. Add `[EARTH MODE]` badge, non-interactive.
 
-**Step 2 — Climate Panel section**
-- Add "CLIMATE" collapsible section to `src/panelStackLayout.js` (after DATA LAYERS, after SCENES)
-- Section header: `🌊 CLIMATE`
-- Each climate layer gets a toggle row (same pattern as existing layers)
+Layers to disable:
+- `militaryFlights`
+- `militaryInstallations`
+- `militaryAwareness`
+- `cctv`
+- `radio`
+- `rocketLaunches`
 
-**Step 3 — Climate API layers** (wire one at a time, test each on Vercel)
+CSS class: `earth-mode-disabled`. Keep all underlying code — UI only.
 
-Priority order:
-1. `src/data/openaqLayer.js` — Air quality (OpenAQ v3, free, no key needed)
-2. `src/data/firmsLayer.js` — Wildfire heat (existing `/api/firms` endpoint — just wire the client layer)  
-3. `src/data/noaaCrwLayer.js` — Coral bleaching (NOAA Coral Reef Watch, free tile URL)
-4. `src/data/nhcStormsLayer.js` — Active storm tracks (NHC GeoJSON feed, free)
-5. `src/data/droughtLayer.js` — Drought monitor (USDM GeoJSON, free)
-6. `src/data/seaLevelLayer.js` — Sea level anomaly (NASA TOPEX/PODAAS WMS, free)
-7. `src/data/gfwDeforestLayer.js` — Deforestation alerts (Global Forest Watch tiles, free)
-8. `src/data/oceanTempLayer.js` — SST (NOAA OISSTv2 WMS, free)
-9. `src/data/mangroveLayer.js` — Mangrove extent (Global Mangrove Watch tiles, free)
+**Human gate:** Spy layers show badge, are non-interactive, look clean.
 
-**Each new layer file pattern:**
-```js
-// src/data/openaqLayer.js
-export default {
-  id: 'openaq',
-  label: 'Air Quality',
-  category: 'climate',
-  // ... same shape as src/data/earthquakes.js
-};
-```
-Register in `src/main.js` before `dataManager.finalizeRegistrations(LAYER_STATE_REGISTRY)`.
+---
 
-**Human gate 2:** Each layer toggles on/off, renders on globe, doesn't break other layers
+### Step 2 — Climate panel section
 
-**Step 4 — WAVANA stub**
-- Add a disabled `[COMING SOON]` row in the CLIMATE section: "Climate Finance · WAVANA"
-- No wiring needed — placeholder only with tooltip "Funding intelligence — coming soon"
+Add "🌊 CLIMATE" collapsible section in `src/panelStackLayout.js` — after DATA LAYERS, after SCENES. Same toggle row pattern as existing layers.
+
+---
+
+### Step 3 — Climate layers (build in this order)
+
+| # | Layer | Source | Key needed |
+|---|-------|--------|-----------|
+| 1 | 🌀 Active storms | NHC GeoJSON feed | None |
+| 2 | 🌡️ Ocean SST | NOAA OISSTv2 WMS | None |
+| 3 | 🪸 Coral bleaching | NOAA Coral Reef Watch tiles | None |
+| 4 | 🌊 Sea level anomaly | NASA TOPEX WMS | None |
+| 5 | 🌿 Mangroves | Global Mangrove Watch tiles | None |
+| 6 | 📊 ENSO index | NOAA Climate.gov JSON | None |
+| 7 | 🧪 Ocean pH | Copernicus Marine Service | Free account |
+| 8 | 🚶 Displacement flows | IOM DTM API | Free registration |
+
+**Cut from earlier list:** Air quality (no Pacific stations), Drought monitor (US-only), Deforestation (too niche), Wildfire (not SIDS-relevant).
+
+Each layer: new file `src/data/[name]Layer.js`, registered in `src/main.js` before `finalizeRegistrations`.
+
+**Human gate per layer:** Toggles on/off, renders on globe, no JS errors, doesn't break other layers.
+
+---
+
+### Step 4 — WAVANA stub
+
+One disabled row at bottom of CLIMATE section:  
+`💰 Climate Finance · WAVANA` — `[COMING SOON]` with tooltip "Funding intelligence — coming soon"
 
 ---
 
 ## Outputs
 
-- Modified: `src/ui.js`, `src/panelStackLayout.js`, `src/main.js`
-- New files: `src/data/openaqLayer.js`, `src/data/firmsLayer.js`, `src/data/noaaCrwLayer.js`, `src/data/nhcStormsLayer.js`, `src/data/droughtLayer.js` (and others per priority)
-- Modified CSS: `style.css` — `.earth-mode-disabled`, `[EARTH MODE]` badge token
+- Modified: `src/ui.js`, `src/panelStackLayout.js`, `src/main.js`, `style.css`
+- New files: `src/data/nhcStormsLayer.js`, `src/data/oceanSstLayer.js`, `src/data/coralBleachLayer.js`, `src/data/seaLevelLayer.js`, `src/data/mangroveLayer.js`, `src/data/ensoLayer.js`, `src/data/oceanPhLayer.js`, `src/data/displacementLayer.js`
 
 ---
 
-## Human gate (final)
+## Final human gate
 
-- [ ] Spy tools show `[EARTH MODE]` badge, are non-interactive
+- [ ] Spy tools show `[EARTH MODE]` badge, non-interactive
 - [ ] CLIMATE section opens/closes cleanly
-- [ ] At least 3 climate layers toggle on/off without JS errors
-- [ ] WAVANA stub row is visible but disabled
-- [ ] No regressions on existing layers (flights, earthquakes, satellites, AIS)
+- [ ] All 8 layers toggle without errors
+- [ ] WAVANA stub visible, disabled
+- [ ] No regressions on flights, earthquakes, satellites, AIS
 - [ ] Deploy to Vercel, confirm live
-
----
-
-## Next phase after this
-
-`phases/02_branding/CONTEXT.md` (not yet written) — EARTH identity assets, color tokens, logo swap, remove "God's Eye View" references from UI text.
