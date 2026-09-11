@@ -1,10 +1,8 @@
 # Phase 01 — Climate Intelligence Panel
 
-**Goal:** Add a "🌊 CLIMATE" section to the left dashboard with 8 expert-validated climate layers. Disable spy tools with EARTH MODE badge.
-
-**Audience:** IOM, COPRRRA delegates, Pacific SIDS governments, climate NGOs  
-**Status:** Not started  
-**Dependencies:** All 24 API functions live ✓ · Pacific SIDS locations live ✓
+**Goal:** Research-grade climate panel for IOM, COPRRRA delegates, Pacific SIDS governments.  
+**Status:** PARKED — resume after NIUANGO bid is won  
+**Audience:** Climate researchers, IOM, Pacific government officials, NGOs
 
 ---
 
@@ -20,72 +18,89 @@
 
 ---
 
-## Process
+## Step 1 — EARTH MODE badges (do first, fast)
 
-### Step 1 — EARTH MODE badges
+Gray out 6 spy layers. Add `[EARTH MODE]` badge, non-interactive:
+`militaryFlights`, `militaryInstallations`, `militaryAwareness`, `cctv`, `radio`, `rocketLaunches`
 
-Gray out 6 spy layers in the toggle panel. Add `[EARTH MODE]` badge, non-interactive.
-
-Layers to disable:
-- `militaryFlights`
-- `militaryInstallations`
-- `militaryAwareness`
-- `cctv`
-- `radio`
-- `rocketLaunches`
-
-CSS class: `earth-mode-disabled`. Keep all underlying code — UI only.
-
-**Human gate:** Spy layers show badge, are non-interactive, look clean.
+CSS class: `earth-mode-disabled`. Keep all code — UI only.
 
 ---
 
-### Step 2 — Climate panel section
+## Step 2 — Panel structure
 
-Add "🌊 CLIMATE" collapsible section in `src/panelStackLayout.js` — after DATA LAYERS, after SCENES. Same toggle row pattern as existing layers.
-
----
-
-### Step 3 — Climate layers (build in this order)
-
-| # | Layer | Source | Key needed |
-|---|-------|--------|-----------|
-| 1 | 🌀 Active storms | NHC GeoJSON feed | None |
-| 2 | 🌡️ Ocean SST | NOAA OISSTv2 WMS | None |
-| 3 | 🪸 Coral bleaching | NOAA Coral Reef Watch tiles | None |
-| 4 | 🌊 Sea level anomaly | NASA TOPEX WMS | None |
-| 5 | 🌿 Mangroves | Global Mangrove Watch tiles | None |
-| 6 | 📊 ENSO index | NOAA Climate.gov JSON | None |
-| 7 | 🧪 Ocean pH | Copernicus Marine Service | Free account |
-| 8 | 🚶 Displacement flows | IOM DTM API | Free registration |
-
-**Cut from earlier list:** Air quality (no Pacific stations), Drought monitor (US-only), Deforestation (too niche), Wildfire (not SIDS-relevant).
-
-Each layer: new file `src/data/[name]Layer.js`, registered in `src/main.js` before `finalizeRegistrations`.
-
-**Human gate per layer:** Toggles on/off, renders on globe, no JS errors, doesn't break other layers.
+Three sections in left dashboard: DATA LAYERS · SCENES · 🌊 CLIMATE  
+Add via `src/panelStackLayout.js`. Organise CLIMATE into 4 sub-groups (see below).
 
 ---
 
-### Step 4 — WAVANA stub
+## Step 3 — Climate layers
 
-One disabled row at bottom of CLIMATE section:  
-`💰 Climate Finance · WAVANA` — `[COMING SOON]` with tooltip "Funding intelligence — coming soon"
+Organised by the 5 questions a Pacific climate researcher actually asks:
+
+### WHAT'S HAPPENING NOW
+| Layer | Source | Key | Status |
+|-------|--------|-----|--------|
+| 🌀 Active storms | GDACS all-hazards API | None | Ready |
+| 🪸 Coral bleaching | NOAA CRW DHW ERDDAP | None | Ready |
+| 🌡️ Ocean SST anomaly | NOAA ERDDAP WMS | None | Ready |
+| 🌧️ Rainfall anomaly | CHIRPS (UCSB) | None | Ready |
+| 📊 ENSO phase | NOAA CPC text → HUD chip | None | HUD only, not a layer |
+
+### WHAT HAS HAPPENED (patterns)
+| Layer | Source | Key | Status |
+|-------|--------|-----|--------|
+| 🌀 Historical cyclone tracks | IBTrACS (NOAA) — 150yr Pacific | None | Ready, free JSON |
+| 🌊 Sea level trend | PSMSL tide gauges — Funafuti/Tarawa/Suva | None | Ready, free |
+| 🌿 Mangrove baseline | JAXA GMW 2020 static GeoJSON | None | Download once |
+
+### WHAT'S COMING (projections)
+| Layer | Source | Key | Status |
+|-------|--------|-----|--------|
+| 📈 SLR projections 2050/2100 | NOAA AR6 per-location | None | Ready, free |
+| 🌡️ CMIP6 temp delta | **Bridge → v1** `/api/analyse` | None | Already built |
+
+### HUMAN IMPACT
+| Layer | Source | Key | Status |
+|-------|--------|-----|--------|
+| 🚶 Displacement flows | **Bridge → v1** `/api/displacement` | None | Already built |
+| 🆘 Humanitarian events | RELIEFWEB API | None | Free, no auth |
+| 👥 Population at risk | WorldPop × SLR zones | None | Free, requires compute |
+
+### ECOSYSTEMS
+| Layer | Source | Key | Status |
+|-------|--------|-----|--------|
+| 🪸 Coral bleaching | (see WHAT'S HAPPENING NOW) | — | — |
+| 🌿 Mangroves | (see WHAT HAS HAPPENED) | — | — |
+
+**Cut and not returning:** Air quality (no Pacific stations), USDM drought (US-only), deforestation (too niche), NHC storms (wrong basin — Atlantic only).
 
 ---
 
-## Outputs
+## Step 4 — WAVANA stub
 
-- Modified: `src/ui.js`, `src/panelStackLayout.js`, `src/main.js`, `style.css`
-- New files: `src/data/nhcStormsLayer.js`, `src/data/oceanSstLayer.js`, `src/data/coralBleachLayer.js`, `src/data/seaLevelLayer.js`, `src/data/mangroveLayer.js`, `src/data/ensoLayer.js`, `src/data/oceanPhLayer.js`, `src/data/displacementLayer.js`
+`💰 Climate Finance · WAVANA — [COMING SOON]` — disabled row, bottom of panel.
+
+---
+
+## Build order when resuming
+
+1. EARTH MODE badges (30 min)
+2. Panel section scaffold (1 hr)
+3. WHAT'S HAPPENING NOW layers — GDACS, bleaching, SST (1 day)
+4. WHAT HAS HAPPENED — IBTrACS tracks, PSMSL gauges (1 day)
+5. WHAT'S COMING — SLR projections, v1 CMIP6 bridge (1 day)
+6. HUMAN IMPACT — v1 displacement bridge, RELIEFWEB (half day)
+7. WAVANA stub (30 min)
 
 ---
 
 ## Final human gate
 
 - [ ] Spy tools show `[EARTH MODE]` badge, non-interactive
-- [ ] CLIMATE section opens/closes cleanly
-- [ ] All 8 layers toggle without errors
+- [ ] CLIMATE section opens/closes cleanly with 4 sub-groups
+- [ ] At least 3 layers per group toggle without errors
+- [ ] ENSO chip shows in HUD with current phase + anomaly
+- [ ] v1 bridge returns displacement data for a SIDS country
 - [ ] WAVANA stub visible, disabled
-- [ ] No regressions on flights, earthquakes, satellites, AIS
 - [ ] Deploy to Vercel, confirm live
