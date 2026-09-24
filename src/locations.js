@@ -514,6 +514,102 @@ export const CITY_POIS = {
       },
     ],
   },
+  niue: {
+    name: 'Niue',
+    groundElevation: 68, // raised coral platform — one of the highest Pacific islands
+    viewBounds: { southwest: { lat: -19.18, lng: -170.07 }, northeast: { lat: -18.94, lng: -169.78 } },
+    pois: [
+      { name: 'Alofi — Capital', lat: -19.0568, lon: -169.9184, alt: 800, pitch: -30, heading: 90, buildingHeight: 8 },
+      { name: 'Limu Pools — Coastal Zone', lat: -18.9773, lon: -169.9337, alt: 500, pitch: -35, heading: 180, buildingHeight: 3 },
+      { name: 'Avaiki Cave — Northwest Coast', lat: -18.9883, lon: -169.9417, alt: 400, pitch: -30, heading: 135, buildingHeight: 3 },
+      { name: 'Togo Chasm — East Coast', lat: -19.0751, lon: -169.8476, alt: 600, pitch: -35, heading: 270, buildingHeight: 3 },
+      { name: 'Huvalu Forest Reserve', lat: -19.1123, lon: -169.8745, alt: 900, pitch: -40, heading: 0, buildingHeight: 15 },
+    ],
+  },
+  tuvalu: {
+    name: 'Tuvalu',
+    groundElevation: 2, // mean elevation ~2m — existential sea level risk
+    viewBounds: { southwest: { lat: -8.60, lng: 179.10 }, northeast: { lat: -8.45, lng: 179.25 } },
+    pois: [
+      { name: 'Funafuti — Capital Atoll', lat: -8.5243, lon: 179.1942, alt: 1200, pitch: -45, heading: 0, buildingHeight: 5 },
+      { name: 'Fongafale — Government District', lat: -8.5232, lon: 179.1988, alt: 600, pitch: -35, heading: 270, buildingHeight: 8 },
+      { name: 'Funafuti Conservation Area', lat: -8.4521, lon: 179.1384, alt: 1500, pitch: -45, heading: 0, buildingHeight: 3 },
+      { name: 'Tepuka Islet — Sea Level Monitor', lat: -8.4089, lon: 179.0923, alt: 800, pitch: -40, heading: 90, buildingHeight: 2 },
+      { name: 'Funafuti Lagoon', lat: -8.5500, lon: 179.1200, alt: 2000, pitch: -50, heading: 0, buildingHeight: 1 },
+    ],
+  },
+  fiji: {
+    name: 'Fiji',
+    groundElevation: 6,
+    viewBounds: { southwest: { lat: -18.20, lng: 178.38 }, northeast: { lat: -18.08, lng: 178.52 } },
+    pois: [
+      { name: 'Suva — Pacific Climate Hub', lat: -18.1416, lon: 178.4419, alt: 1200, pitch: -30, heading: 315, buildingHeight: 20 },
+      { name: 'Suva Seawall — Flood Frontline', lat: -18.1385, lon: 178.4501, alt: 500, pitch: -25, heading: 180, buildingHeight: 5 },
+      { name: 'Fiji Parliament', lat: -18.1431, lon: 178.4398, alt: 400, pitch: -30, heading: 45, buildingHeight: 12 },
+      { name: 'Lami Mangroves', lat: -18.1023, lon: 178.3889, alt: 800, pitch: -40, heading: 90, buildingHeight: 8 },
+      { name: 'Suva Harbour', lat: -18.1320, lon: 178.4280, alt: 900, pitch: -35, heading: 180, buildingHeight: 10 },
+    ],
+  },
+  vanuatu: {
+    name: 'Vanuatu',
+    groundElevation: 15,
+    viewBounds: { southwest: { lat: -17.80, lng: 168.27 }, northeast: { lat: -17.67, lng: 168.40 } },
+    pois: [
+      { name: 'Port Vila — Capital', lat: -17.7334, lon: 168.3219, alt: 1000, pitch: -30, heading: 315, buildingHeight: 12 },
+      { name: 'Vila Bay — Cyclone Exposure', lat: -17.7450, lon: 168.3150, alt: 800, pitch: -30, heading: 270, buildingHeight: 5 },
+      { name: 'Iririki Island', lat: -17.7380, lon: 168.3248, alt: 600, pitch: -35, heading: 180, buildingHeight: 8 },
+      { name: 'Efate Coastline', lat: -17.6900, lon: 168.3800, alt: 1500, pitch: -40, heading: 180, buildingHeight: 5 },
+      { name: 'Mele Bay Reef', lat: -17.7600, lon: 168.2800, alt: 1200, pitch: -45, heading: 0, buildingHeight: 3 },
+    ],
+  },
+  kiribati: {
+    name: 'Kiribati',
+    groundElevation: 2, // mean elevation ~2m — among the most threatened nations
+    viewBounds: { southwest: { lat: 1.28, lng: 172.92 }, northeast: { lat: 1.40, lng: 173.03 } },
+    pois: [
+      { name: 'South Tarawa — Capital', lat: 1.3282, lon: 172.9770, alt: 1000, pitch: -45, heading: 0, buildingHeight: 5 },
+      { name: 'Betio — Lowest Point', lat: 1.3589, lon: 172.9234, alt: 600, pitch: -40, heading: 90, buildingHeight: 4 },
+      { name: 'Bonriki — Airport & Flood Zone', lat: 1.3816, lon: 173.0183, alt: 700, pitch: -40, heading: 180, buildingHeight: 5 },
+      { name: 'Ambo — Eroding Shoreline', lat: 1.3497, lon: 172.9890, alt: 500, pitch: -35, heading: 270, buildingHeight: 4 },
+      { name: 'Tarawa Lagoon', lat: 1.3600, lon: 172.9600, alt: 1800, pitch: -50, heading: 0, buildingHeight: 1 },
+    ],
+  },
+  samoa: {
+    name: 'Samoa',
+    groundElevation: 10,
+    viewBounds: { southwest: { lat: -13.88, lng: -171.83 }, northeast: { lat: -13.78, lng: -171.70 } },
+    pois: [
+      { name: 'Apia — Capital', lat: -13.8314, lon: -171.7670, alt: 900, pitch: -30, heading: 0, buildingHeight: 15 },
+      { name: 'Mulinu\'u Peninsula — Government', lat: -13.8135, lon: -171.7745, alt: 600, pitch: -30, heading: 270, buildingHeight: 10 },
+      { name: 'Apia Harbour', lat: -13.8280, lon: -171.7730, alt: 700, pitch: -35, heading: 180, buildingHeight: 8 },
+      { name: 'Aleisa — Tsunami Buffer Zone', lat: -13.8600, lon: -171.7900, alt: 800, pitch: -35, heading: 90, buildingHeight: 5 },
+      { name: 'Vaitele Floodplain', lat: -13.8500, lon: -171.8200, alt: 1000, pitch: -40, heading: 0, buildingHeight: 5 },
+    ],
+  },
+  solomons: {
+    name: 'Solomon Islands',
+    groundElevation: 8,
+    viewBounds: { southwest: { lat: -9.50, lng: 159.95 }, northeast: { lat: -9.38, lng: 160.10 } },
+    pois: [
+      { name: 'Honiara — Capital', lat: -9.4456, lon: 160.0271, alt: 1000, pitch: -30, heading: 315, buildingHeight: 12 },
+      { name: 'Point Cruz — Coastal Erosion', lat: -9.4320, lon: 160.0450, alt: 600, pitch: -30, heading: 270, buildingHeight: 8 },
+      { name: 'Guadalcanal Plains', lat: -9.5200, lon: 160.1500, alt: 1500, pitch: -40, heading: 180, buildingHeight: 5 },
+      { name: 'Iron Bottom Sound', lat: -9.3500, lon: 160.0500, alt: 2000, pitch: -45, heading: 0, buildingHeight: 3 },
+      { name: 'Henderson Airport — Flood Risk', lat: -9.4280, lon: 160.0547, alt: 800, pitch: -35, heading: 90, buildingHeight: 10 },
+    ],
+  },
+  palau: {
+    name: 'Palau',
+    groundElevation: 3,
+    viewBounds: { southwest: { lat: 7.28, lng: 134.44 }, northeast: { lat: 7.40, lng: 134.56 } },
+    pois: [
+      { name: 'Koror — Capital', lat: 7.3419, lon: 134.4792, alt: 900, pitch: -30, heading: 0, buildingHeight: 12 },
+      { name: 'Rock Islands — UNESCO Heritage', lat: 7.2248, lon: 134.3667, alt: 1500, pitch: -40, heading: 90, buildingHeight: 5 },
+      { name: 'Jellyfish Lake — Climate Indicator', lat: 7.1567, lon: 134.3762, alt: 600, pitch: -45, heading: 0, buildingHeight: 3 },
+      { name: 'Ngerulmud — New Capital', lat: 7.5006, lon: 134.6242, alt: 700, pitch: -30, heading: 270, buildingHeight: 15 },
+      { name: 'Babeldaob — Largest Island', lat: 7.5500, lon: 134.6000, alt: 2000, pitch: -45, heading: 0, buildingHeight: 5 },
+    ],
+  },
 };
 
 /**
