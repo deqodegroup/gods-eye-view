@@ -1,0 +1,39 @@
+name: Check upstream God's Eye View updates
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  propose-upstream-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout DEQODE fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch upstream
+        run: |
+          git remote add upstream https://github.com/bilawalsidhu/gods-eye-view.git
+          git fetch upstream main
+      - name: Create sync branch and pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B chore/upstream-sync origin/main
+          if git merge --no-ff --no-edit upstream/main; then
+            if git diff --quiet origin/main...HEAD; then
+              echo "Already up to date"
+              exit 0
+            fi
+            git push --force-with-lease origin HEAD:chore/upstream-sync
+            gh pr create --base main --head chore/upstream-sync --title "chore: sync upstream God's Eye View" --body "Automated upstream merge proposal. Review CI, licensing, secrets, data-provider terms and DEQODE changes before merging." || echo "Sync PR may already exist; review existing PR."
+          else
+            echo "::warning::Upstream merge conflicts; manual resolution required."
+            git merge --abort
+            exit 1
+          fi
